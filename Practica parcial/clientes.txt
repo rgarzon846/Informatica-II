@@ -1,0 +1,8 @@
+Nro de cliente: 1, Nombre: , Tipo de cuenta: Ahorro, Saldo en cuenta: 78.00
+Nro de cliente: 2, Nombre: , Tipo de cuenta: Corriente, Saldo en cuenta: 78.00
+1|Rocio|852365504.00|Cuneta corriente
+1431655769|uan|333333.00|Caja de ahorros
+1431655769|arid|3.00|Cuenta Corriente
+1|Rocio|6589741.00|Cuenta Corriente
+2|Juan|789654.00|Caja de Ahorro
+3|Farid|-96.00|Cuenta corriente
