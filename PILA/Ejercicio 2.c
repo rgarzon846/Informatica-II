@@ -14,6 +14,7 @@ int main() {
   Nodo *p = NULL;
   srand(time(NULL));
   int bandera = 0;
+
   for (int i = 0; i < 5; i++) {
     Nodo *nuevo = (Nodo *)malloc(sizeof(Nodo));
     if (nuevo != NULL) {
@@ -32,6 +33,7 @@ int main() {
       printf("\nNo se ha podido crear el nodo\n");
     }
   }
+
   Nodo *aux = p;
   printf("Los valores en la pila son:\n");
   while (aux != NULL) {
@@ -40,14 +42,14 @@ int main() {
   }
   aux = p;
   printf("\nLos valores pares de la pila son:\n");
-  while(aux != NULL){
-    if((aux->valor%2) == 0){
-        printf("%d", aux->valor);
-        aux = aux->sig;
-        bandera = 1;
+  while (aux != NULL) {
+    if ((aux->valor % 2) == 0) {
+      printf("%d\n", aux->valor);
+      bandera = 1;
     }
+    aux = aux->sig;
   }
-  if(bandera == 0){
+  if (bandera == 0) {
     printf("\nNo hay valores pares en la pila\n");
   }
   bandera = 0;
