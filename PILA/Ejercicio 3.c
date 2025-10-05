@@ -18,7 +18,7 @@ void Menu();
 void Agregar(Nodo **);
 void Borrar(Nodo **);
 void Imprimir(Nodo *);
-void Tamanio();
+void Tamanio(Nodo *);
 void MostrarUltimo(Nodo *);
 
 int main(){
@@ -28,6 +28,16 @@ int main(){
 
 void Menu(){
     Nodo *p = NULL;
+    char opcion = ' ';
+    char volver = 's';
+
+    do{
+        printf("Ingrese la opcion que desee ejecutar:\n");
+        printf("a. Agregar 5 valores\n");
+        printf("b. Borrar el ultimo valor de la pila\n");
+        printf("c. Imprimir la pila\n");
+        printf("d. Imprimir el tamaño de la pila en bytes\n");
+    }
 }
 
 void Agregar(Nodo **p){
@@ -74,6 +84,20 @@ void Imprimir(Nodo *p){
     }
 }
 
-void Tamanio(){
+void Tamanio(Nodo *p){
+    int cont = 0;
+    Nodo *aux = p;
+    while(aux != NULL){
+        cont++;
+        aux = aux->sig;
+    }
+    printf("La cantidad de valores ingresados es de : %d valores", cont);
     printf("\nEl tamaño en bytes de la pila es de %zu", (5 * sizeof(Nodo)));
+}
+
+void MostrarUltimo(Nodo *p){
+    Nodo *aux = p;
+    if(aux->sig == NULL){
+        printf("El valor del ultimo nodo es: %.2f", aux->valor);
+    }
 }
