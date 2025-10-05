@@ -54,6 +54,7 @@ void Menu() {
         printf("\nDesea ingresar otra letra\?: Si(s), No(n)\n");
         scanf(" %c", &otro);
       }
+      otro = 's';
       break;
     case 'b':
     case 'B':
@@ -154,10 +155,11 @@ void MayusMinus(Nodo *p) {
   int contMayus = 0;
   int contMinus = 0;
   while (aux != NULL) {
-    if (65 <= aux->letra <= 90) {
+   
+    if (65 <= aux->letra && aux->letra <= 90) {
       contMayus++;
     }
-    if (97 <= aux->letra <= 122) {
+    if (97 <= aux->letra && aux->letra <= 122) {
       contMinus++;
     }
     aux = aux->sig;
