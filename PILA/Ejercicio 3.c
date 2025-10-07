@@ -104,16 +104,10 @@ void Agregar(Nodo **p) {
 
 void Borrar(Nodo **p) {
   Nodo *aux = *p;
-  Nodo *ant = NULL;
-
-  while (aux->sig != NULL) {
-    ant = aux;
-    aux = aux->sig;
-  }
-  printf("\nSe ha eliminado el ultimo nodo que contenia el valor: %.2f",
-         aux->valor);
+  float valor = aux->valor;
+  *p = aux->sig;
   free(aux);
-  ant->sig = NULL;
+  printf("\nEl nodo eliminado contenia el valor: %.2f", valor);
 }
 
 void Imprimir(Nodo *p) {
@@ -137,11 +131,7 @@ void Tamanio(Nodo *p) {
 }
 
 void MostrarUltimo(Nodo *p) {
-  Nodo *aux = p;
-  while (aux->sig != NULL) {
-    aux = aux->sig;
-  }
-  printf("El valor del ultimo nodo es: %.2f", aux->valor);
+ printf("\nEl ultimo nodo de la pila es: %.2f\n", p->valor);
 }
 
 void Liberar(Nodo **p) {
