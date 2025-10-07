@@ -93,9 +93,16 @@ void Agregar(Nodo **p) {
 
 void Borrar(Nodo **p) {
   Nodo *aux = *p;
-  float valor = aux->valor;
-  *p = aux->sig;
+  Nodo *ant = NULL;
+  float valor = 0;
+
+  while(aux->sig != NULL){
+    ant = aux;
+    aux = aux->sig;
+    valor = aux->valor;
+  }
   free(aux);
+  ant->sig = NULL;
   printf("Se ha liberado el ultimo nodo que contenia el valor: %.2f\n", valor);
 }
 
