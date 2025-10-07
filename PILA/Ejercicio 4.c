@@ -26,9 +26,9 @@ void TotalNodos(Nodo *);
 void MayusMinus(Nodo *);
 void Liberar(Nodo **);
 
-int main() { 
-    Menu();
-    return 0; 
+int main() {
+  Menu();
+  return 0;
 }
 
 void Menu() {
@@ -94,7 +94,7 @@ void Menu() {
     }
     printf("\nDesea volver al menu\?: Si(s), No(n)\n");
     scanf(" %c", &volver);
-  }while(volver == 's' || volver == 'S');
+  } while (volver == 's' || volver == 'S');
   Liberar(&p);
 }
 
@@ -155,7 +155,7 @@ void MayusMinus(Nodo *p) {
   int contMayus = 0;
   int contMinus = 0;
   while (aux != NULL) {
-   
+
     if (65 <= aux->letra && aux->letra <= 90) {
       contMayus++;
     }

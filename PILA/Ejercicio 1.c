@@ -18,7 +18,7 @@ void Agregar(Nodo **);
 void Borrar(Nodo **);
 void Imprimir(Nodo *);
 float Sumar(Nodo *);
-void Lierar(Nodo **);
+void Liberar(Nodo **);
 
 int main() {
   Menu();
@@ -83,16 +83,8 @@ void Agregar(Nodo **p) {
     Nodo *nuevo = (Nodo *)malloc(sizeof(Nodo));
     if (nuevo != NULL) {
       scanf(" %f", &nuevo->valor);
-      nuevo->sig = NULL;
-      if (*p == NULL) {
-        *p = nuevo;
-      } else {
-        Nodo *aux = *p;
-        while (aux->sig != NULL) {
-          aux = aux->sig;
-        }
-        aux->sig = nuevo;
-      }
+      nuevo->sig = *p;
+      *p = nuevo;
     } else {
       printf("\nNo se ha podido crear el nuevo nodo\n");
     }
@@ -101,15 +93,10 @@ void Agregar(Nodo **p) {
 
 void Borrar(Nodo **p) {
   Nodo *aux = *p;
-  Nodo *ant = NULL;
-
-  while (aux->sig != NULL) {
-    ant = aux;
-    aux = aux->sig;
-  }
+  float valor = aux->valor;
+  *p = aux->sig;
   free(aux);
-  ant->sig = NULL;
-  printf("Se ha liberado el ultimo nodo\n");
+  printf("Se ha liberado el ultimo nodo que contenia el valor: %.2f\n", valor);
 }
 
 void Imprimir(Nodo *p) {
