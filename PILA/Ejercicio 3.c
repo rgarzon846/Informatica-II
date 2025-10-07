@@ -94,16 +94,8 @@ void Agregar(Nodo **p) {
     if (nuevo != NULL) {
       printf("Ingrese un valor: ");
       scanf(" %f", &nuevo->valor);
-      nuevo->sig = NULL;
-      if (*p == NULL) {
-        *p = nuevo;
-      } else {
-        Nodo *aux = *p;
-        while (aux->sig != NULL) {
-          aux = aux->sig;
-        }
-        aux->sig = nuevo;
-      }
+      nuevo->sig = *p;
+      *p = nuevo;     
     } else {
       printf("\nNo se ha podido crear el nodo\n");
     }
