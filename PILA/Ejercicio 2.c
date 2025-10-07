@@ -19,16 +19,8 @@ int main() {
     Nodo *nuevo = (Nodo *)malloc(sizeof(Nodo));
     if (nuevo != NULL) {
       nuevo->valor = rand() % 10 + 1;
-      nuevo->sig = NULL;
-      if (p == NULL) {
-        p = nuevo;
-      } else {
-        Nodo *aux = p;
-        while (aux->sig != NULL) {
-          aux = aux->sig;
-        }
-        aux->sig = nuevo;
-      }
+      nuevo->sig = p;
+      p = nuevo;
     } else {
       printf("\nNo se ha podido crear el nodo\n");
     }
