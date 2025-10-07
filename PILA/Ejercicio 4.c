@@ -100,19 +100,11 @@ void Menu() {
 
 void Agregar(Nodo **p) {
   Nodo *nuevo = (Nodo *)malloc(sizeof(NULL));
-  printf("Ingrese una letra: ");
-  scanf(" %c", &nuevo->letra);
-  nuevo->sig = NULL;
   if (nuevo != NULL) {
-    if (*p == NULL) {
-      *p = nuevo;
-    } else {
-      Nodo *aux = *p;
-      while (aux->sig != NULL) {
-        aux = aux->sig;
-      }
-      aux->sig = nuevo;
-    }
+    printf("Ingrese una letra: ");
+    scanf(" %c", &nuevo->letra);
+    nuevo->sig = *p;
+    *p = nuevo;
   } else {
     printf("\nNo se ha podido crear el nuevo nodo\n");
   }
@@ -120,15 +112,11 @@ void Agregar(Nodo **p) {
 
 void Borrar(Nodo **p) {
   Nodo *aux = *p;
-  Nodo *ant = NULL;
-  while (aux->sig != NULL) {
-    ant = aux;
-    aux = aux->sig;
-  }
-  printf("\nSe ha liberado el ultimo nodo de la pila que contenia la letra: %c",
-         aux->letra);
+  char letra = aux->letra;
+  *p = aux->sig;
   free(aux);
-  ant->sig = NULL;
+  printf("\nSe ha liberado el ultimo nodo de la pila que contenia la letra: %c", letra);
+  
 }
 
 void Imprimir(Nodo *p) {
