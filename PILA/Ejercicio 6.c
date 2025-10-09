@@ -46,7 +46,7 @@ void Menu() {
         printf("a. Agregar un producto\n");
         printf("b. Borrar el ultimo producto ingresado\n");
         printf("c. Mostrar el stock ingresado\n");
-        printf("d. Descontar unidades de un ptoducto\n");
+        printf("d. Descontar unidades de un producto\n");
         printf("e. Reponer unidades de un producto\n");
         scanf(" %c", &opcion);
         
@@ -94,8 +94,8 @@ void Menu() {
 }
 
 void Agregar(Nodo **p) {
-    Nodo *nuevo = (Nodo *)malloc(sizeof(NULL));
-    printf("\nIngrese los siguientes datos los producto:\n");
+    Nodo *nuevo = (Nodo *)malloc(sizeof(Nodo));
+    printf("\nIngrese los siguientes datos del producto:\n");
     printf("Nombre: ");
     getchar();
     fgets(nuevo->producto.nombre, 25, stdin);
@@ -138,38 +138,51 @@ void Descontar(Nodo **p){
     Nodo *aux = *p;
     char nombre[25];
     int cant = 0;
+    int bandera = 0;
     printf("\nIngrese el nombre del producto que desee descontar stock: ");
     getchar();
     fgets(nombre, 25, stdin);
+    nombre[strcspn(nombre, "\n")] = '\0';
     while(aux != NULL){
         if(strcmp(nombre, aux->producto.nombre) == 0){
             printf("\nEl producto cuenta con %d unidades\n", aux->producto.cant);
             printf("\nCuantas unidades desea descontar\?: ");
             scanf(" %d", &cant);
-            aux->producto.cant = cant;
+            aux->producto.cant = aux->producto.cant - cant;
+            printf("\nSe ha actualizado el stock del producto con exito\n");
         }
         aux = aux->sig;
     }
-    printf("\nSe ha actualizado el stock del producto con exito\n");
+     if(bandera == 0){
+        printf("\nNo se ha encontrado el producto\n");
+    }
+    bandera = 0;
 }
 
 void Reponer(Nodo **p){
     Nodo *aux = *p;
     char nombre[25];
     int cant = 0;
+    int bandera = 0;
     printf("\nIngrese el nombre del producto que desee reponer stock: ");
     getchar();
     fgets(nombre, 25, stdin);
+    nombre[strcspn(nombre, "\n")] = '\0';
     while(aux != NULL){
         if(strcmp(nombre, aux->producto.nombre) == 0){
+            bandera = 1;
             printf("\nEl producto cuenta con %d unidades\n", aux->producto.cant);
             printf("\nCuantas unidades desea reponer\?: ");
             scanf(" %d", &cant);
-            aux->producto.cant = cant;
+            aux->producto.cant = aux->producto.cant + cant;
+            printf("\nSe ha actualizado el stock del producto con exito\n");
         }
         aux = aux->sig;
     }
-    printf("\nSe ha actualizado el stock del producto con exito\n");
+    if(bandera == 0){
+        printf("\nNo se ha encontrado el producto\n");
+    }
+    bandera = 0;
 }
 
 
@@ -179,5 +192,5 @@ void Liberar(Nodo **p){
         free(*p);
         *p = prox;
     }
-    printf("\nSe ha liberado la lista con exito\n");
+    printf("\nSe ha liberado la pila con exito\n");
 }
