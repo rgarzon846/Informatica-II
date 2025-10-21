@@ -32,8 +32,8 @@ typedef struct Nodo{
 }Nodo;
 
 void Menu();
-void AgregarAlumno(Nodo **, Nodo **);
-void EliminarAlumno(Nodo **, Nodo **);
+void AgregarAlumno(Nodo **);
+void EliminarAlumno(Nodo **);
 void ImprimirAlumnos(Nodo *);
 float PromedioGeneral(Nodo *);
 void MayorMenor(Nodo *);
@@ -45,15 +45,14 @@ int main(){
 }
 
 void Menu(){
-    Nodo *frente = NULL;
     Nodo *fin = NULL;
     char opcion = ' ';
 
     do{
         printf("\n********Menu********\n");
-        printf("a) Agregar un alumno a la cola\n");
-        printf("b) Eliminar el primer alumno ingresado\n");
-        printf("c) Imprimir la cola de alumnos\n");
+        printf("a) Agregar un alumno a la pila\n");
+        printf("b) Eliminar el ultimo alumno ingresado\n");
+        printf("c) Imprimir la pila de alumnos\n");
         printf("d) Mostrar el promedio general de alumnos con nota mayor o igual a 8\n");
         printf("e) Mostrar el alumno con mayor promedio y el alumno con menor promedio\n");
         printf("f) Salir del menu\n");
@@ -63,42 +62,42 @@ void Menu(){
             case 'a':
             case 'A': char otro = 's';
             while(otro == 's' || otro == 'S'){
-                AgregarAlumno(&frente, &fin);
+                AgregarAlumno(&fin);
                 printf("\nDesea ingresar otro alumno\?: Si(s), No(n)\n");
                 scanf(" %c", &otro);
             }
             break;
             case 'b':
-            case 'B': if(frente != NULL){
-                EliminarAlumno(&frente, &fin);
+            case 'B': if(fin != NULL){
+                EliminarAlumno(&fin);
             }else{
                 printf("\nDebe ingresar alumnos\n");
             }
             break;
             case 'c':
-            case 'C': if(frente != NULL){
-                ImprimirAlumnos(frente);
+            case 'C': if(fin != NULL){
+                ImprimirAlumnos(fin);
             }else{
                 printf("\nDebe ingresar alumnos\n");
             }
             break;
             case 'd':
-            case 'D': if(frente != NULL){
-                printf("\nEl promedio general es: %.2f\n", PromedioGeneral(frente));
+            case 'D': if(fin != NULL){
+                printf("\nEl promedio general es: %.2f\n", PromedioGeneral(fin));
             }else{
                 printf("\nDebe ingresar alumnos\n");
             }
             break;
             case 'e':
-            case 'E': if(frente != NULL){
-               MayorMenor(frente);
+            case 'E': if(fin != NULL){
+               MayorMenor(fin);
             }else{
                 printf("\nDebe ingresar alumnos\n");
             }
             break;
             case 'f':
-            case 'F': if(frente != NULL){
-                Liberar(&frente);
+            case 'F': if(fin != NULL){
+                Liberar(&fin);
             }else{
                 printf("\nSaliendo del menu, nada para liberar\n");
             }
@@ -108,7 +107,7 @@ void Menu(){
     }while(opcion != 'f' && opcion != 'F');
 }
 
-void AgregarAlumno(Nodo **frente, Nodo **fin){
+void AgregarAlumno(Nodo **fin){
     Nodo *nuevo = (Nodo *) malloc(sizeof(Nodo));
 
     if(nuevo != NULL){
@@ -125,10 +124,9 @@ void AgregarAlumno(Nodo **frente, Nodo **fin){
         scanf(" %f", &nuevo->alumnos.promedio);
 
         if(*fin == NULL){
-            *frente = nuevo;
             *fin = nuevo;
         }else{
-            (*fin)->sig = nuevo;
+            nuevo->sig = *fin;
             *fin = nuevo;
         }
     }else{
@@ -136,22 +134,22 @@ void AgregarAlumno(Nodo **frente, Nodo **fin){
     }
 }
 
-void EliminarAlumno(Nodo **frente, Nodo **fin){
-    Nodo *aux = *frente;
+void EliminarAlumno(Nodo **fin){
+    Nodo *aux = *fin;
     Alumno alumno = aux->alumnos;
-    free(*frente);
-    *frente = aux->sig;
-    if(*frente == NULL){
-        *fin = NULL;
+    free(*fin);
+    *fin = aux->sig;
+    if(*fin == NULL){
+        printf("\nLa pila esta vacia\n");
     }
     printf("\nSe ha eliminado al alumno:\n");
     printf("%-25s | %-25s | %s\n", "Nombre", "Carrera", "Promedio");
     printf("%-25s | %-25s | %.2f\n", alumno.nombre, alumno.carrera, alumno.promedio);
 }
 
-void ImprimirAlumnos(Nodo *frente){
-    Nodo *aux = frente;
-    printf("\nLos alumnos de la cola son:\n");
+void ImprimirAlumnos(Nodo *fin){
+    Nodo *aux = fin;
+    printf("\nLos alumnos de la pila son:\n");
     printf("%-25s | %-25s | %s\n", "Nombre", "Carrera", "Promedio");
     while(aux != NULL){
     printf("%-25s | %-25s | %.2f\n", aux->alumnos.nombre, aux->alumnos.carrera, aux->alumnos.promedio);
@@ -159,8 +157,8 @@ void ImprimirAlumnos(Nodo *frente){
     }
 }
 
-float PromedioGeneral(Nodo *frente){
-    Nodo *aux = frente;
+float PromedioGeneral(Nodo *fin){
+    Nodo *aux = fin;
     float promgeneral = 0;
     int contador = 0;
     while(aux != NULL){
@@ -173,11 +171,11 @@ float PromedioGeneral(Nodo *frente){
     return promgeneral/contador;
 }
 
-void MayorMenor(Nodo *frente){
+void MayorMenor(Nodo *fin){
     float mayor = 0;
     Alumno Mayor;
     Alumno Menor;
-    Nodo *aux = frente;
+    Nodo *aux = fin;
     float menor = aux->alumnos.promedio;
 
     while(aux != NULL){
@@ -200,12 +198,12 @@ void MayorMenor(Nodo *frente){
     printf("%-25s | %-25s | %.2f\n", Menor.nombre, Menor.carrera, Menor.promedio);
 }
 
-void Liberar(Nodo **frente){
-    while(*frente != NULL){
-        Nodo *prox = (*frente)->sig;
-        free(*frente);
-        *frente = prox;
+void Liberar(Nodo **fin){
+    while(*fin != NULL){
+        Nodo *prox = (*fin)->sig;
+        free(*fin);
+        *fin = prox;
     }
-    printf("\nSe ha liberado la cola con exito\n");
+    printf("\nSe ha liberado la pila con exito\n");
 }
 
