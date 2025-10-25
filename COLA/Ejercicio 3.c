@@ -26,7 +26,7 @@ int main() {
     if (nuevo != NULL) {
       nuevo->valor = rand() % 100 + 1;
       nuevo->sig = NULL;
-      if (fin == 0) {
+      if (fin == NULL) {
         frente = nuevo;
         fin = nuevo;
       } else {
