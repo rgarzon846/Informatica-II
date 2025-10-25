@@ -70,28 +70,28 @@ void Menu(){
             case 'B': if(frente != NULL){
                 ImprimirPropiedades(frente);
             }else{
-                printf("\nDebe ingresar propiedades a la cola\n");
+                printf("\nNo ha ingresado ninguna propiedad\n");
             }
             break;
             case 'c':
             case 'C': if(frente != NULL){
                 BorrarPropiedad(&frente, &fin);
             }else{
-                printf("\nDebe ingresar propiedades a la cola\n");
+                printf("\nNo ha ingresado ninguna propiedad\n");
             }
             break;
             case 'd':
             case 'D': if(frente != NULL){
                 ListadoPorTipo(frente);
             }else{
-                printf("\nDebe ingresar propiedades a la cola\n");
+                printf("\nNo ha ingresado ninguna propiedad\n");
             }
             break;
             case 'e':
             case 'E': if(frente != NULL){
                 CalcularCantidad(frente);
             }else{
-                printf("\nDebe ingresar propiedades a la cola\n");
+                printf("\nNo ha ingresado ninguna propiedad\n");
             }
             break;
             case 'f':
@@ -145,10 +145,10 @@ void RegistrarNueva(Nodo **frente, Nodo **fin){
 
 void ImprimirPropiedades(Nodo *frente){
     Nodo *aux = frente;
-    printf("\nLas propiedades ingresadas hasta el moemnto son:\n");
+    printf("\nLas propiedades ingresadas hasta el momento son:\n");
     printf("%-8s | %-12s | %-12s | %-12s | %-25s | %-12s | %s\n", "Codigo", "Terreno m2", "Cubiertos m2", "Operacion", "Ubicacion", "Estado", "Precio");
     while(aux != NULL){
-        printf("%-8d | %-12.2f | %-12.2f | %-12s | %-25s | %-12s | %.2f\n", aux->propiedades.codigo, aux->propiedades.terreno, aux->propiedades.cubiertos, aux->propiedades.operacion, aux->propiedades.estado, aux->propiedades.ubicacion, aux->propiedades.precio);
+        printf("%-8d | %-12.2f | %-12.2f | %-12s | %-25s | %-12s | %.2f\n", aux->propiedades.codigo, aux->propiedades.terreno, aux->propiedades.cubiertos, aux->propiedades.operacion, aux->propiedades.ubicacion, aux->propiedades.estado, aux->propiedades.precio);
         aux = aux->sig;
     }
     aux = frente;
@@ -157,9 +157,10 @@ void ImprimirPropiedades(Nodo *frente){
         printf("\nNo se ha podido abrir el archivo\n");
     }else{
         while(aux != NULL){
-        fprintf(archivo, "%-8d | %-15.2f | %-12.2f | %-12s | %-25s | %-12s | %.2f\n", aux->propiedades.codigo, aux->propiedades.terreno, aux->propiedades.cubiertos, aux->propiedades.operacion, aux->propiedades.estado, aux->propiedades.ubicacion, aux->propiedades.precio);
+        fprintf(archivo, "%-8d | %-15.2f | %-12.2f | %-12s | %-25s | %-12s | %.2f\n", aux->propiedades.codigo, aux->propiedades.terreno, aux->propiedades.cubiertos, aux->propiedades.operacion, aux->propiedades.ubicacion, aux->propiedades.estado, aux->propiedades.precio);
         aux = aux->sig;
         }
+        printf("\nArchivo actualizado con las propiedades ingresadas\n");
     }
     fclose(archivo);
 }
@@ -167,11 +168,11 @@ void ImprimirPropiedades(Nodo *frente){
 void BorrarPropiedad(Nodo **frente, Nodo **fin){
     Propiedad propiedad = (*frente)->propiedades;
     Nodo *aux = *frente;
-    free(*frente);
     *frente = aux->sig;
     if(*frente == NULL){
         *fin = NULL;
     }
+    free(aux);
     printf("\nSe ha eliminado la propiedad:\n");
     printf("%-8s | %-12s | %-12s | %-15s | %-25s | %-15s | %s\n", "Codigo", "Terreno m2", "Cubiertos m2", "Operacion", "Ubicacion", "Estado", "Precio");
     printf("%-8d | %-12.2f | %-12.2f | %-15s | %-25s | %-15s | %.2f\n", propiedad.codigo, propiedad.terreno, propiedad.cubiertos, propiedad.operacion, propiedad.ubicacion, propiedad.estado, propiedad.precio);   
@@ -207,19 +208,11 @@ void CalcularCantidad(Nodo *frente){
     while(aux != NULL){
         if((strcmp(aux->propiedades.estado, "Desocupada")) == 0 || (strcmp(aux->propiedades.estado, "desocupada")) == 0){
             desocupada++;
-        }
-        aux = aux->sig;
-    }
-
-    aux = frente;
-   
-    while(aux != NULL){
-        if((strcmp(aux->propiedades.estado, "Ocupada")) == 0 || (strcmp(aux->propiedades.estado, "ocupada")) == 0){
+        }if((strcmp(aux->propiedades.estado, "Ocupada")) == 0 || (strcmp(aux->propiedades.estado, "ocupada")) == 0){
             ocupada++;
         }
         aux = aux->sig;
     }
-
     printf("\nLa cantidad de propiedades ocupadas es de %d y las desocupadas es de %d\n", ocupada, desocupada);
 }
 
