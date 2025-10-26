@@ -1,0 +1,2 @@
+Codigo     | Nombre                    | Unidades     | Precio     | Dia | Mes
+24         | porota                    | 45           | 23000.00   | 23  | 9
