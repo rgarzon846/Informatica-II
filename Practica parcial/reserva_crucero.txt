@@ -1,0 +1,7 @@
+
+Reserva N°     | Nombre                    | Cabina N°      | Noches     | Valor      | Dia | Mes
+5              | Rocio Loza                | 41             | 22         | 1230.00    | 16  | 6
+4              | Desire Loza               | 33             | 10         | 1230.00    | 23  | 3
+3              | Victoria Loza             | 91             | 1          | 1230.00    | 8   | 7
+2              | Evelyn Loza               | 18             | 3          | 1230.00    | 31  | 6
+1              | Gabriela Loza             | 73             | 25         | 1230.00    | 20  | 2
