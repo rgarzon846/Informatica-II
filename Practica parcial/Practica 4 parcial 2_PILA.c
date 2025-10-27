@@ -50,6 +50,7 @@ void Menu(){
     char opcion = ' ';
 
     do{
+        printf("\n*****MENU*****\n");
         printf("\nIngrese la opcion que desee ejecutar:\n");
         printf("a) Registrar una nueva reserva\n");
         printf("b) Imprimir el listado de reservas hechas hasta el momento (tambien generar archivo)\n");
@@ -170,7 +171,7 @@ void ImprimirReservas(NodoReserva *pila){
     if(archivo == NULL){
         printf("\nNo se ha podido abrir el archivo\n");
     }else{
-        fprintf(archivo, "\n%-15s | %-25s | %-15s | %-10s | %-10s | %-3s | %s\n", "Reserva N°", "Nombre", "Cabina N°", "Noches", "Valor", "Dia", "Mes");
+        fprintf(archivo, "%-15s | %-25s | %-15s | %-10s | %-10s | %-3s | %s\n", "Reserva N°", "Nombre", "Cabina N°", "Noches", "Valor", "Dia", "Mes");
         while(aux != NULL){
             fprintf(archivo, "%-14d | %-25s | %-14d | %-10d | %-10.2f | %-3d | %d\n", aux->reserva.numreserva, aux->reserva.nombre, aux->reserva.cabina, aux->reserva.noches, 
             aux->reserva.valornoche, aux->reserva.dia, aux->reserva.mes);
