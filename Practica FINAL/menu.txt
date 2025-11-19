@@ -1,0 +1,3 @@
+Nombre                    | Precio
+Milanesa con pure         | 7412.00
+FIdeos con crema          | 145236.00
