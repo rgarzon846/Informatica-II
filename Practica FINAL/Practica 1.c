@@ -31,6 +31,7 @@ void ImprimirMenu(Platos *);
 void EliminarPlato(Platos **, Platos**);
 void CalcularTotal(Platos *);
 void OrdenarPlatos(Platos *);
+void LiberarCola(Platos **, Platos **);
 
 int main(){
     
