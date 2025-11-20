@@ -1,3 +1,7 @@
+
+***********MENU DE PLATOS DISPONIBLES***********
 Nombre                    | Precio
-Milanesa con pure         | 7412.00
-FIdeos con crema          | 145236.00
+Palta con tomate          | 222569.00
+Fideo con atun            | 225789.00
+Arrozzzz                  | 213654.00
+Porotos                   | 569874.00
