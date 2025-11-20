@@ -1,7 +1,5 @@
 
 ***********MENU DE PLATOS DISPONIBLES***********
 Nombre                    | Precio
-Palta con tomate          | 222569.00
-Fideo con atun            | 225789.00
-Arrozzzz                  | 213654.00
-Porotos                   | 569874.00
+papas                     | 36985.00
+milanesa                  | 23698.00
