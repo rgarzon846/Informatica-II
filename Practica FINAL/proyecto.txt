@@ -1,0 +1,4 @@
+
+Nombre                    | Estado       | Duracion
+Hacer un puente           | Retrasada    | 90
+Programar un codigo       | Terminada    | 3

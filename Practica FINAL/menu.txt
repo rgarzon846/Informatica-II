@@ -1,5 +1,0 @@
-
-***********MENU DE PLATOS DISPONIBLES***********
-Nombre                    | Precio
-papas                     | 36985.00
-milanesa                  | 23698.00
