@@ -1,3 +1,4 @@
 Nombre                    | Estado       | Duracion
-                          | Terminada    | 3
-Construir barco           | Retrasada    | 60
+CASA                      | Retrasada    | 9
+AUTO                      | Terminada    | 9
+MAREA                     | Terminada    | 3
