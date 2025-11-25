@@ -1,4 +1,3 @@
-
 Nombre                    | Estado       | Duracion
-Hacer un puente           | Retrasada    | 90
-Programar un codigo       | Terminada    | 3
+                          | Terminada    | 3
+Construir barco           | Retrasada    | 60
