@@ -1,0 +1,4 @@
+
+Marca                     | Modelo                    | Stock      | Precio
+PEUGEOT                   | DOCE                      | 5          | 369852.00
+TOYOTA                    | COROLLA                   | 6          | 325874.00
