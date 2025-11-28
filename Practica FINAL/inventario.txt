@@ -1,4 +1,5 @@
 
 Marca                     | Modelo                    | Stock      | Precio
-PEUGEOT                   | DOCE                      | 5          | 369852.00
-TOYOTA                    | COROLLA                   | 6          | 325874.00
+CHEVROLET                 | PRISMA                    | 8          | 693258.00
+RENAULT                   | CLIO                      | 3          | 30125487.00
+FORD                      | K                         | 6          | 20000000.00

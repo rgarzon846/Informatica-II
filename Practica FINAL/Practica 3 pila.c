@@ -21,19 +21,19 @@ typedef struct{
     double precio;
 }Automovil;
 
-typedef struct Lista{
+typedef struct Pila{
     Automovil automovil;
-    struct Lista *sig;
-}Lista;
+    struct Pila *sig;
+}Pila;
 
 void Menu();
-void AgregarAutomovil(Lista **);
-void ImprimirInventario(Lista *);
-void EliminarAutomovil(Lista **);
-double CalcularValorTotal(Lista *);
+void AgregarAutomovil(Pila **);
+void ImprimirInventario(Pila *);
+void EliminarAutomovil(Pila **);
+double CalcularValorTotal(Pila *);
 void Mayuscula(char [25]);
-void LiberarLista(Lista **);
-int ListaVacia(Lista *);
+void LiberarPila(Pila **);
+int PilaVacia(Pila *);
 
 int main(){
     Menu();
@@ -41,7 +41,7 @@ int main(){
 }
 
 void Menu(){
-    Lista *lista = NULL;
+    Pila *pila = NULL;
     int opcion = 0;
 
     do{
@@ -49,7 +49,7 @@ void Menu(){
         printf("\nIngrese la opcion que desee ejecutar\n");
         printf("1) Agregar un automovil al inventario\n");
         printf("2) Imprimir el inventario registrado\n");
-        printf("3) Eliminar un automovil del inventario\n");
+        printf("3) Eliminar el ultimo automovil agregado\n");
         printf("4) Calcular el total de dinero registrado\n");
         printf("5) Salir\n");
         scanf(" %d", &opcion);
@@ -57,31 +57,31 @@ void Menu(){
         switch(opcion){
             case 1: char otra = 's';
             while(otra == 's' || otra == 'S'){
-                AgregarAutomovil(&lista);
+                AgregarAutomovil(&pila);
                 printf("\nDesea agregar otro automovil al inventario\?: Si(S), No(N)\n");
                 scanf(" %c", &otra);
             }
             break;
-            case 2: if(ListaVacia(lista)){
-                ImprimirInventario(lista);
+            case 2: if(PilaVacia(pila)){
+                ImprimirInventario(pila);
             }else{
                 printf("\nAun no hay automoviles registrados\n");
             }
             break;
-            case 3: if(ListaVacia(lista)){
-                EliminarAutomovil(&lista);
+            case 3: if(PilaVacia(pila)){
+                EliminarAutomovil(&pila);
             }else{
                 printf("\nAun no hay automoviles registrados\n");
             }
             break;
-            case 4: if(ListaVacia(lista)){
-                printf("\nEL dinero total registrado en el inventario es de: %.2f\n", CalcularValorTotal(lista));
+            case 4: if(PilaVacia(pila)){
+                printf("\nEL dinero total registrado en el inventario es de: %.2f\n", CalcularValorTotal(pila));
             }else{
                 printf("\nAun no hay automoviles registrados\n");
             }
             break;
-            case 5: if(ListaVacia(lista)){
-                LiberarLista(&lista);
+            case 5: if(PilaVacia(pila)){
+                LiberarPila(&pila);
             }else{
                 printf("\nSaliendo... No hay automoviles registrados\n");
             }
@@ -92,8 +92,8 @@ void Menu(){
     }while(opcion != 5);
 }
 
-void AgregarAutomovil(Lista **lista){
-    Lista *nuevo = (void *) malloc(sizeof(Lista));
+void AgregarAutomovil(Pila **pila){
+    Pila *nuevo = (void *) malloc(sizeof(Pila));
     if(nuevo != NULL){
         printf("\nIngrese la informacion solicitada sobre el automovil\n");
         printf("Marca: ");
@@ -111,14 +111,11 @@ void AgregarAutomovil(Lista **lista){
         scanf(" %lf", &nuevo->automovil.precio);
         nuevo->sig = NULL;
 
-        if(*lista == NULL){
-            *lista = nuevo;
+        if(PilaVacia(*pila) == 0){
+            *pila = nuevo;
         }else{
-            Lista *aux = *lista;
-            while(aux->sig != NULL){
-                aux = aux->sig;
-            }
-            aux->sig = nuevo;
+           nuevo->sig = *pila;
+           *pila = nuevo;
         }
         printf("\nEl automovil se ha registrado con exito\n");
     }else{
@@ -126,8 +123,8 @@ void AgregarAutomovil(Lista **lista){
     }
 }
 
-void ImprimirInventario(Lista *lista){
-    Lista *aux = lista;
+void ImprimirInventario(Pila *pila){
+    Pila *aux = pila;
 
     printf("\n********INVENTARIO********\n");
     printf("\n%-25s | %-25s | %-10s | %s\n", "Marca", "Modelo", "Stock", "Precio");
@@ -136,7 +133,7 @@ void ImprimirInventario(Lista *lista){
         aux = aux->sig;
     }
 
-    aux = lista;
+    aux = pila;
 
     FILE *archivo = fopen("inventario.txt", "w");
     if(archivo != NULL){
@@ -153,47 +150,19 @@ void ImprimirInventario(Lista *lista){
     }
 }
 
-void EliminarAutomovil(Lista **lista){
-    Lista *aux = *lista;
-    Lista *ant = NULL;
-    Automovil automovil;
-    char marca[25];
-    char modelo[25];
-
-    printf("\nIngrese la marca del automovil que desea eliminar: ");
-    getchar();
-    fgets(marca, 25, stdin);
-    marca[strcspn(marca, "\n")] = '\0';
-    Mayuscula(marca);
-    printf("Ingrese el modelo del automovil que desea eliminar: ");
-    fgets(modelo, 25, stdin);
-    modelo[strcspn(modelo, "\n")] = '\0';
-    Mayuscula(modelo);
-
-    while(aux != NULL && (strcmp(modelo, aux->automovil.modelo) != 0) && (strcmp(marca, aux->automovil.marca) != 0)){
-        ant = aux;
-        aux = aux->sig;
-    }
-
-    if(aux != NULL){
-        if(ant == NULL){
-            *lista = aux->sig;
-        }else{
-            ant->sig = aux->sig;
-            automovil = aux->automovil;
-            free(aux);
-            printf("\nEl automovil:\n");
-            printf("\n%-25s | %-25s | %-10s | %s\n", "Marca", "Modelo", "Stock", "Precio");
-            printf("%-25s | %-25s | %-10d | %.2f\n", automovil.marca, automovil.modelo, automovil.stock, automovil.precio);
-            printf("\nse ha eliminado\n");
-        }
-    }else{
-        printf("\nNo se ha encontrado el automovil que desea eliminar\n");
-    }
+void EliminarAutomovil(Pila **pila){
+    Pila *aux = *pila;
+    Automovil automovil = (*pila)->automovil;
+    *pila = aux->sig;
+    free(aux);
+    printf("\nEl automovil:\n");
+    printf("\n%-25s | %-25s | %-10s | %s\n", "Marca", "Modelo", "Stock", "Precio");
+    printf("%-25s | %-25s | %-10d | %.2f\n", automovil.marca, automovil.modelo, automovil.stock, automovil.precio);
+    printf("\nse ha eliminado\n");
 }
 
-double CalcularValorTotal(Lista *lista){
-    Lista *aux = lista;
+double CalcularValorTotal(Pila *pila){
+    Pila *aux = pila;
     double suma = 0;
     double porauto = 0;
 
@@ -202,7 +171,6 @@ double CalcularValorTotal(Lista *lista){
         suma += porauto;
         aux = aux->sig;
     }
-
     return suma;
 }
 
@@ -212,17 +180,17 @@ void Mayuscula(char cadena[25]){
     }
 }
 
-void LiberarLista(Lista **lista){
-    while(*lista != NULL){
-        Lista *prox = (*lista)->sig;
-        free(*lista);
-        *lista = prox;
+void LiberarPila(Pila **pila){
+    while(*pila != NULL){
+        Pila *prox = (*pila)->sig;
+        free(*pila);
+        *pila = prox;
     }
-    printf("\nLa lista se ha liberado con exito\n");
+    printf("\nLa pila se ha eliminado con exito\n");
 }
 
-int ListaVacia(Lista *lista){
-    if(lista == NULL){
+int PilaVacia(Pila *pila){
+    if(pila == NULL){
         return 0;
     }else{
         return 1;
