@@ -1,4 +1,4 @@
 Codigo     | Terreno m2      | Cubiertos m2    | Operacion       | Ubicacion                 | Estado          | Precio
-365        | 236541.00       | 231.00          | En Alquiler     | Cañada                   | Ocupada         | 5647.00
-1254       | 336528.00       | 254.00          | En Alquiler     | Boulevard                 | Desocupada      | 236541.00
-123        | 36589.00        | 325.00          | En Venta        | Mendoza                   | Ocupada         | 36895.00
+2658       | 456321.00       | 6398.00         | En Venta        | laoa                      | Ocupada         | 5896.00
+56324      | 253.00          | 2587.00         | En Venta        | jajajaj                   | Desocupada      | 3654.00
+1236       | 25.00           | 3652.00         | En Alquiler     | joals                     | Ocupada         | 5632.00

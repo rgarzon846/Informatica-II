@@ -54,7 +54,7 @@ void Menu(){
         printf("\n*********MENU DE OPCIONES*********\n");
         printf("1) Registrar una nueva propiedad\n");
         printf("2) Imprimir las propiedades registradas y un archivo de tecto con las mismas\n");
-        printf("3) Eliminar una propiedad\n");
+        printf("3) Eliminar la ultima propiedad ingresada\n");
         printf("4) Imprimir las propiedades registradas por tipo de operacion\n");
         printf("5) Calcular las propiedades ocupadas y las propiedades desocupadas\n");
         printf("6) Salir\n");
