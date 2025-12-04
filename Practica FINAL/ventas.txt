@@ -1,0 +1,4 @@
+Codigo     | Nombre                    | Vendidos        | Precio     | Dia  | Mes
+1          | jasjaj                    | 2               | 1000.00    | 3    | 2
+3          | sasa                      | 2               | 6.00       | 1000 | 0
+321        | lsalsla                   | 2               | 2222.00    | 1    | 2
