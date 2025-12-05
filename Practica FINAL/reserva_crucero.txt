@@ -1,0 +1,5 @@
+Nombre                    | Numero     | Valor noche     | Cant noches     | Dia  | Mes  | Nro cabina
+ROCIO                     | 0          | 1253.30         | 28              | 8    | 7    | 270
+OLA SI                    | 2          | 78541.00        | 22              | 4    | 10   | 644
+ARROD                     | 3          | 963.50          | 14              | 8    | 6    | 167
+KAKAKKA                   | 4          | 63.25           | 23              | 5    | 4    | 770
