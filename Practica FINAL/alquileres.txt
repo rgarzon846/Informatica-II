@@ -1,0 +1,2 @@
+N° Remito      | Centro          | Tipo            | Costo diario    | Cant dias       | Facturado  | Total
+1002            | Chapelco        | Completo        | 30000.00        | 6               | No         | 180000.00
